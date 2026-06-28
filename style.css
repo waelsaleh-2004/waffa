@@ -388,3 +388,16 @@ h2{
     line-height: 72px;
     text-align: center;
 }
+
+
+/* تنسيق شاشة البدء التمهيدية */
+.start-box {
+    text-align: center;
+    padding: 10px 0;
+}
+.start-box p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+}
+

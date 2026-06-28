@@ -10,59 +10,60 @@
 
 <div class="quiz-container">
     <div class="img">
-        <img src="img/IMG-20260628-WA0005.jpg" alt="logo">
-    </div>
-    <div class="progress">
-        Question <span id="current">1</span> / <span id="total">5</span>
+        <img src="./img/IMG-20260628-WA0005.jpg" alt="logo">
     </div>
 
-    <div class="progress-bar">
-        <div class="progress-fill"></div>
+    <!-- 🌟 شاشة البدء الجديدة لفك قفل الصوت 🌟 -->
+    <div id="startContainer" class="start-box">
+        <h2>مرحباً بك في موقع على بصيرة 📝</h2>
+        <button id="startBtn" class="category-btn" style="margin-top: 20px; width: 100%;"> 🚀 إختبر معلوماتك </button>
     </div>
 
-    <h2 id="question">
-        ما هي لغة البرمجة المستخدمة لتطوير الويب؟
-    </h2>
+    <!-- محتوى الاختبار (مخفي في البداية ويظهر بعد الضغط على ابدأ) -->
+    <div id="quizContent" style="display: none;">
+        <div class="progress">
+            سؤال <span id="current">1</span> / <span id="total">5</span>
+        </div>
 
-    <div id="answers"></div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
 
-    <button id="nextBtn">السؤال التالي</button>
+        <h2 id="question"></h2>
 
+        <div id="answers"></div>
+
+        <button id="nextBtn">السؤال التالي </button>
+    </div>
+
+    <!-- صندوق النتيجة النهائي -->
     <div id="resultContainer" class="score-box" style="display: none;">
         انتهى الاختبار 🎉 النتيجة:
         <span id="scoreText">0 / 5</span>
+        <button id="restartBtn" class="category-btn" style="margin-top: 15px; width: 100%;">إعادة الاختبار 🔄</button>
     </div>
 </div>
 
-<!-- شاشة "أحسنت!" المنبثقة للإجابة الصحيحة -->
+<!-- الشاشات المنبثقة للتغذية الراجعة والتنبيهات -->
 <div id="successModal" class="modal">
     <div class="modal-content">
-        <div class="checkmark-circle">
-            <div class="checkmark"></div>
-        </div>
+        <div class="checkmark-circle"><div class="checkmark"></div></div>
         <h3>أحسنت! 🎉</h3>
         <p>إجابة صحيحة وممتازة</p>
     </div>
 </div>
 
-<!-- شاشة "حاول مجدداً" المنبثقة المشجعة للإجابة الخاطئة -->
 <div id="errorModal" class="modal">
     <div class="modal-content error-content">
-        <div class="cross-circle">
-            <div class="cross-line line1"></div>
-            <div class="cross-line line2"></div>
-        </div>
+        <div class="cross-circle"><div class="cross-line line1"></div><div class="cross-line line2"></div></div>
         <h3>للأسف، إجابة خاطئة! 🤔</h3>
-        <p id="correctAnswerHint">الإجابة الصحيحة هي: </p>
+        <p id="correctAnswerHint"></p>
     </div>
 </div>
 
-<!-- شاشة التنبيه المنبثقة الجديدة لاختيار إجابة أولاً -->
 <div id="warningModal" class="modal">
     <div class="modal-content warning-content">
-        <div class="warning-circle">
-            <div class="warning-exclamation">!</div>
-        </div>
+        <div class="warning-circle"><div class="warning-exclamation">!</div></div>
         <h3>تنبيه ⚠️</h3>
         <p>الرجاء الإجابة على السؤال أولاً قبل الانتقال!</p>
     </div>
