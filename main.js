@@ -43,9 +43,25 @@ const errorModal = document.getElementById("errorModal");
 const warningModal = document.getElementById("warningModal");
 const correctAnswerHint = document.getElementById("correctAnswerHint");
 
-// 🎵 إنشاء كائنات المؤثرات الصوتية للأجوبة
+// 🎵 إنشاء كائنات المؤثرات الصوتية
 const successSound = new Audio("./audio/meldix-success-340660.mp3");
 const wrongSound = new Audio("./audio/u_8g40a9z0la-fail-234710.mp3");
+
+// 🛠️ حل مشكلة جوجل كروم: تحضير الملفات الصوتية للعمل فور أي تفاعل
+successSound.preload = "auto";
+wrongSound.preload = "auto";
+
+// دالة آمنة لتشغيل الصوت متوافقة مع سياسات المتصفحات الحديثة
+function playAudio(sound) {
+    sound.currentTime = 0;
+    const playPromise = sound.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.catch(error => {
+            console.log("تم تقييد الصوت مؤقتاً من المتصفح حتى يتفاعل المستخدم بالكامل:", error);
+        });
+    }
+}
 
 const feedbackText = document.createElement("div");
 feedbackText.style.fontSize = "1.2rem";
@@ -61,7 +77,6 @@ function loadQuestion(){
     feedbackText.textContent = ""; 
 
     document.getElementById("current").textContent = currentQuestion + 1;
-    // تحديث إجمالي الأسئلة ديناميكياً بناءً على حجم مصفوفة الأسئلة المتوفرة
     document.getElementById("total").textContent = quizData.length; 
     
     question.textContent = quizData[currentQuestion].question;
@@ -87,9 +102,8 @@ function loadQuestion(){
                 feedbackText.style.color = "#2ecc71";
                 score++; 
                 
-                // 🔊 تشغيل صوت النجاح فوراً
-                successSound.currentTime = 0; 
-                successSound.play().catch(e => console.log("المتصفح يقيد الصوت قبل التفاعل اللمسي الأول"));
+                // 🔊 تشغيل الصوت عبر الدالة الآمنة الجديدة
+                playAudio(successSound);
 
                 successModal.style.display = "flex";
                 setTimeout(() => {
@@ -106,9 +120,8 @@ function loadQuestion(){
                 allButtons[correctIndex].style.backgroundColor = "#2ecc71";
                 allButtons[correctIndex].style.color = "white";
 
-                // 🔊 تشغيل صوت الخطأ فوراً
-                wrongSound.currentTime = 0;
-                wrongSound.play().catch(e => console.log("المتصفح يقيد الصوت قبل التفاعل اللمسي الأول"));
+                // 🔊 تشغيل الصوت عبر الدالة الآمنة الجديدة
+                playAudio(wrongSound);
 
                 correctAnswerHint.innerHTML = `الإجابة الصحيحة هي: <strong>"${quizData[currentQuestion].answers[correctIndex]}"</strong>`;
                 errorModal.style.display = "flex";
