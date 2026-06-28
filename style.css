@@ -1,0 +1,390 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f1ff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.quiz-container{
+    width:450px;
+    background:white;
+    padding:25px;
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.progress{
+    color:#8b5cf6;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.progress-bar{
+    width:100%;
+    height:6px;
+    background:#ececec;
+    border-radius:20px;
+    margin:10px 0 25px;
+}
+
+.progress-fill{
+    width:20%;
+    height:100%;
+    background:#8b5cf6;
+    border-radius:20px;
+    transition:.3s;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+    color:#333;
+    font-size:20px;
+    line-height:1.6;
+}
+
+.answer{
+    width:100%;
+    padding:14px;
+    margin-bottom:12px;
+    border:2px solid #eee;
+    border-radius:12px;
+    background:white;
+    cursor:pointer;
+    text-align:left;
+    transition:.3s;
+}
+
+.answer:hover{
+    border-color:#8b5cf6;
+}
+
+.answer.selected{
+    background:#f2ebff;
+    border-color:#8b5cf6;
+    color:#8b5cf6;
+    font-weight:bold;
+}
+
+#nextBtn{
+    width:100%;
+    padding:14px;
+    border:none;
+    background:#8b5cf6;
+    color:white;
+    border-radius:12px;
+    margin-top:10px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.score-box{
+    margin-top:20px;
+    background:#f7f5ff;
+    padding:15px;
+    border-radius:15px;
+    text-align:center;
+    color:#666;
+}
+
+.score-box span{
+    display:block;
+    margin-top:5px;
+    color:#8b5cf6;
+    font-size:20px;
+    font-weight:bold;
+}
+
+
+
+/* تنسيق أزرار الإجابات الافتراضي */
+.answer {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    font-size: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: all 0.3s ease; /* تجعل تحول الألوان ناعماً وسلساً */
+}
+
+/* تأثير عند تمرير الماوس فوق الزر قبل الاختيار */
+.answer:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+/* لمنع ظهور مؤشر اليد بعد أن يختار المستخدم ويتم قفل الأزرار */
+.answer[style*="background-color"] {
+    pointer-events: none; /* تمنع الضغط مرة أخرى */
+}
+.category-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border: 2px solid #34495e;
+    background-color: transparent;
+    color: #34495e;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* ستايل الزر النشط (القسم الحالي) */
+.category-btn.active, .category-btn:hover {
+    background-color: #8b5cf6;
+    color: white;
+}
+ img{
+    width: 200px;
+    display: flex;
+    text-align: center;
+    margin: auto;
+    
+ }
+
+
+ /* أضف هذه التنسيقات في أسفل ملف style.css الحالي لديك */
+
+/* تأثيرات الشاشة المنبثقة (Modal) */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px); /* تغبيش الخلفية */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* تأثير ظهور مطاطي مبهج */
+    width: 320px;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.modal-content h3 {
+    color: #2ecc71;
+    font-size: 24px;
+    margin: 15px 0 5px;
+}
+
+.modal-content p {
+    color: #666;
+    font-size: 16px;
+}
+
+/* تأثير علامة الصح المتحركة */
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 50%;
+    border: 4px solid #2ecc71;
+    box-sizing: content-box;
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+.checkmark {
+    position: absolute;
+    content: '';
+    top: 46%;
+    left: 17%;
+    height: 35px;
+    width: 18px;
+    border-right: 4px solid #2ecc71;
+    border-top: 4px solid #2ecc71;
+    transform-origin: left top;
+    transform: scaleX(-1) rotate(135deg);
+    animation: checkmark 0.6s ease;
+}
+
+@keyframes scaleUp {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+@keyframes checkmark {
+    0% { height: 0; width: 0; opacity: 1; }
+    20% { height: 0; width: 18px; opacity: 1; }
+    40% { height: 35px; width: 18px; opacity: 1; }
+    100% { height: 35px; width: 18px; opacity: 1; }
+}
+
+
+/* تأثيرات الشاشات المنبثقة (Modals) */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    width: 340px;
+}
+
+/* حركة اهتزاز لطيفة وتفاعلية عند الخطأ للحث على المحاولة */
+.error-content {
+    animation: shake 0.4s ease-in-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-10px); }
+    40%, 80% { transform: translateX(10px); }
+}
+
+.modal-content h3 {
+    font-size: 22px;
+    margin: 15px 0 8px;
+}
+
+#successModal h3 { color: #2ecc71; }
+#errorModal h3 { color: #e74c3c; }
+
+.modal-content p {
+    color: #555;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* تأثير علامة الصح المتحركة */
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    border: 4px solid #2ecc71;
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+.checkmark {
+    position: absolute;
+    top: 46%;
+    left: 17%;
+    height: 35px;
+    width: 18px;
+    border-right: 4px solid #2ecc71;
+    border-top: 4px solid #2ecc71;
+    transform-origin: left top;
+    transform: scaleX(-1) rotate(135deg);
+    animation: checkmark 0.6s ease;
+}
+
+/* تأثير علامة الخطأ اللطيفة */
+.cross-circle {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    border: 4px solid #e74c3c;
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+.cross-line {
+    position: absolute;
+    background: #e74c3c;
+    width: 4px;
+    height: 40px;
+    top: 20px;
+    left: 38px;
+    border-radius: 2px;
+}
+
+.line1 { transform: rotate(45deg); }
+.line2 { transform: rotate(-45deg); }
+
+@keyframes scaleUp {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+}
+
+@keyframes checkmark {
+    0% { height: 0; width: 0; opacity: 1; }
+    20% { height: 0; width: 18px; opacity: 1; }
+    40% { height: 35px; width: 18px; opacity: 1; }
+    100% { height: 35px; width: 18px; opacity: 1; }
+}
+
+
+/* أضف هذه التنسيقات في أسفل ملف style.css الحالي */
+
+/* حركة اهتزاز مخصصة لشاشة التنبيه */
+.warning-content {
+    animation: shakeWarning 0.4s ease-in-out;
+}
+
+@keyframes shakeWarning {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+#warningModal h3 {
+    color: #f39c12; /* اللون الأصفر الدافئ للتنبيه */
+}
+
+/* تصميم أيقونة علامة التعجب للتنبيه */
+.warning-circle {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    border: 4px solid #f39c12;
+    animation: scaleUp 0.3s ease-in-out;
+}
+
+.warning-exclamation {
+    font-size: 50px;
+    font-weight: bold;
+    color: #f39c12;
+    line-height: 72px;
+    text-align: center;
+}
