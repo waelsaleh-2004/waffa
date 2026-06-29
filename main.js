@@ -52,19 +52,25 @@ const correctAnswerHint = document.getElementById("correctAnswerHint");
 const successSound = new Audio("./audio/meldix-success-340660.mp3");
 const wrongSound = new Audio("./audio/u_8g40a9z0la-fail-234710.mp3");
 
-// برمجية زر ابدأ الاختبار لفك قفل الصوت لمتصفح كروم
+// 🎲 دالة ترتيب الأسئلة عشوائياً
+function shuffleQuestions() {
+    quizData.sort(() => Math.random() - 0.5);
+}
+
+// برمجية زر ابدأ الاختبار لفك قفل الصوت وتوليد أسئلة عشوائية
 startBtn.addEventListener("click", () => {
-    // الخدعة الذكية: تشغيل وإيقاف الصوت صامتاً لتخويل الموقع بالصوت
     successSound.play().then(() => { successSound.pause(); successSound.currentTime = 0; }).catch(()=>{});
     wrongSound.play().then(() => { wrongSound.pause(); wrongSound.currentTime = 0; }).catch(()=>{});
 
-    // إخفاء واجهة الترحيب وعرض واجهة الاختبار
     startContainer.style.display = "none";
     quizContent.style.display = "block";
     
-    // بدء شحن السؤال الأول الآن والصوت مفعل
+    // سطر التعديل الجديد هنا 👇 لخلط الأسئلة قبل التحميل
+    shuffleQuestions();
+    
     loadQuestion();
 });
+
 
 const feedbackText = document.createElement("div");
 feedbackText.style.fontSize = "1.2rem";
@@ -161,6 +167,10 @@ if (restartBtn) {
         score = 0;
         resultContainer.style.display = "none";
         quizContent.style.display = "block";
+        
+        // سطر التعديل الجديد هنا 👇 لإعادة خلط الأسئلة عند تكرار الاختبار
+        shuffleQuestions();
+        
         loadQuestion();
     });
 }
