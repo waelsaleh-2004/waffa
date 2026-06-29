@@ -52,6 +52,7 @@ const correctAnswerHint = document.getElementById("correctAnswerHint");
 const successSound = new Audio("./audio/meldix-success-340660.mp3");
 const wrongSound = new Audio("./audio/u_8g40a9z0la-fail-234710.mp3");
 
+
 // 🎲 دالة ترتيب الأسئلة عشوائياً
 function shuffleQuestions() {
     quizData.sort(() => Math.random() - 0.5);
