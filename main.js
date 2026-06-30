@@ -1,28 +1,68 @@
 const quizData = [
     {
-    question:"رفع الحدث وإزالة النجس وما  في معناهما وعلى صورتهما",
-    answers:["الحدث الاصغر","الطهارة","الوضوء","الغسل"],
-    correct:1
-    },
-    {
-    question:"الحدث ينقسم الى",
-    answers:["حدث اصغر وحدث اكبر","حدث اكبر","حدث اصغر" ,"جميع الاجابات صحيحة"],
-    correct:3
-    },
-    {
-    question:"شئ مستقذر يمنع من صحة الصلاة هذا تعريف ",
-    answers:["النجس","الستحاضة","البول","الحيض"],
-    correct:0
-    },
-    {
-        question: "ما هو حكم الماء الذي تغير لونه أو طعمه أو ريحه بنجاسة؟",
-        answers: ["ماء طهور", "ماء نجس", "ماء طاهر غير مطهر", "ماء مشكوك فيه"],
+        question: "رفع الحدث وإزالة النجس وما في معناهما",
+        answers: ["الاستحاضة", "الطهارة", "الغسل"],
         correct: 1
     },
     {
-        question: "أي مما يلي يُعد من مفسدات ومبطلات التيمم؟",
-        answers: ["النوم الخفيف جداً", "الأكل والشرب", "وجود الماء والقدرة على استعماله", "تغيير الملابس"],
+        question: "ينقسم الحدث إلى قسمين",
+        answers: ["أصغر", "أكبر", "كلاهما"],
         correct: 2
+    },
+    {
+        question: "شيء مستقذر يمنع من صحة الصلاة ونحوها",
+        answers: ["النجس", "الوضوء", "الغسل"],
+        correct: 0
+    },
+    {
+        question: "يتم التطهير من الحدث والنجس بعدة أشياء",
+        answers: ["الماء", "التراب", "كلاهما"],
+        correct: 2
+    },
+    {
+        question: "الماء المطلق عن أي قيد يعتبر",
+        answers: ["نجس", "طاهر ومطهر", "غير طاهر"],
+        correct: 1
+    },
+    {
+        question: "يستثنى من النجس",
+        answers: ["ميتة ليس لها دم", "نجاسة لا يراها البصر المعتدل", "كلاهما"],
+        correct: 2
+    },
+    {
+        question: "تنقسم النجاسة باعتبار كيفية تطهيرها إلى",
+        answers: ["نجاسة مخففة ومغلظة", "نجاسة متوسطة", "كلاهما"],
+        correct: 2
+    },
+    {
+        question: "النجاسة المغلظة هي",
+        answers: ["الكلب والخنزير", "الذباب", "بول الطفل"],
+        correct: 0
+    },
+    {
+        question: "يحرم أكل الميتة ويستثنى من ذلك:",
+        answers: ["السمك", "الجراد", "كلاهما"],
+        correct: 2
+    },
+    {
+        question: "ما أوجب الوضوء دون الغسل يسمى حدثاً",
+        answers: ["أكبر", "متوسط", "أصغر"],
+        correct: 2
+    },
+    {
+        question: "الوَضوء بفتح الواو يقصد به",
+        answers: ["الطهارة", "ماء الوضوء", "الغسل"],
+        correct: 1
+    },
+    {
+        question: "من أركان الوضوء",
+        answers: ["النية وغسل الوجه", "غسل اليدين إلى المرفقين", "كلاهما"],
+        correct: 2
+    },
+    {
+        question: "الماء الطاهر لنفسه وغير مطهر لغيره ",
+        answers: [" ماء تغير لونه وريحه", "   البحر ", "المطر"],
+        correct: 0
     }
 ];
 
@@ -52,9 +92,6 @@ const correctAnswerHint = document.getElementById("correctAnswerHint");
 const successSound = document.getElementById('soundSu');
 const wrongSound = document.getElementById('sounderror');
 
-// const successSound = new Audio("./audio/meldix-success-340660.mp3");
-// const wrongSound = new Audio("./audio/u_8g40a9z0la-fail-234710.mp3");
-
 
 // 🎲 دالة ترتيب الأسئلة عشوائياً
 function shuffleQuestions() {
@@ -69,9 +106,7 @@ startBtn.addEventListener("click", () => {
     startContainer.style.display = "none";
     quizContent.style.display = "block";
     
-    // سطر التعديل الجديد هنا 👇 لخلط الأسئلة قبل التحميل
     shuffleQuestions();
-    
     loadQuestion();
 });
 
@@ -128,8 +163,10 @@ function loadQuestion(){
                 feedbackText.style.color = "#e74c3c";
 
                 const allButtons = answers.querySelectorAll("button");
-                allButtons[correctIndex].style.backgroundColor = "#2ecc71";
-                allButtons[correctIndex].style.color = "white";
+                if (allButtons[correctIndex]) {
+                    allButtons[correctIndex].style.backgroundColor = "#2ecc71";
+                    allButtons[correctIndex].style.color = "white";
+                }
 
                 wrongSound.currentTime = 0;
                 wrongSound.play().catch(e => console.log(e));
@@ -144,7 +181,9 @@ function loadQuestion(){
     });
 
     const progress = ((currentQuestion + 1) / quizData.length) * 100;
-    document.querySelector(".progress-fill").style.width = progress + "%";
+    if(document.querySelector(".progress-fill")) {
+        document.querySelector(".progress-fill").style.width = progress + "%";
+    }
 }
 
 nextBtn.addEventListener("click", () => {
@@ -172,9 +211,7 @@ if (restartBtn) {
         resultContainer.style.display = "none";
         quizContent.style.display = "block";
         
-        // سطر التعديل الجديد هنا 👇 لإعادة خلط الأسئلة عند تكرار الاختبار
         shuffleQuestions();
-        
         loadQuestion();
     });
 }
