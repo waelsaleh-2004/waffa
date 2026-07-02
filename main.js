@@ -63,6 +63,91 @@ const quizData = [
         question: "الماء الطاهر لنفسه وغير مطهر لغيره ",
         answers: [" ماء تغير لونه وريحه", "   البحر ", "المطر"],
         correct: 0
+    },
+    {
+        question: " تطهير السبيلين من كل ملوث بالماء أو الحجارة يسمى",
+        answers: ["غسل" , "   استنجاء  ","الوضوء"],
+        correct: 1
+    },
+    {
+        question: "ما أوجب الغسل يسمى حدثاً",
+        answers: ["أصغر", "أكبر", "نجساً"],
+        correct: 1
+    },
+    {
+        question: "تعميم البدن بالماء بنية هو",
+        answers: ["الوضوء", "الاستنجاء", "الغسل"],
+        correct: 2
+    },
+    {
+        question: "من أركان الغسل",
+        answers: ["النية", "إيصال الماء إلى جميع بدنه", "كلاهما (النية وإيصال الماء)"],
+        correct: 2
+    },
+    {
+        question: "مدة المسح على الخفين للمسافر هي",
+        answers: ["يوم وليلة", "ثلاثة أيام بلياليهن", "أسبوع"],
+        correct: 1
+    },
+    {
+        question: "هو إيصال التراب إلى الوجه واليدين بنية",
+        answers: ["الوضوء", "التيمم", "الغسل"],
+        correct: 1
+    },
+    {
+        question: "هو الدم الخارج على سبيل الصحة من أوقات معلومة",
+        answers: ["حيض", "استحاضة", "نفاس"],
+        correct: 0
+    },
+    {
+        question: "أقل مدة الحمل هي",
+        answers: ["9 أشهر", "ستة أشهر", "سنة"],
+        correct: 1
+    },
+    {
+        question: "أقوال وأفعال مخصوصة مفتتحة بالتكبير ومختتمة بالتسليم هي",
+        answers: ["الصلاة", "التيمم", "الوضوء"],
+        correct: 0
+    },
+    {
+        question: "يشترط للمؤذن والمقيم",
+        answers: ["الإسلام والتمييز", "الذكورة", "كلاهما (الإسلام والتمييز والذكورة)"],
+        correct: 2
+    },
+    {
+        question: "ستر العورة يعتبر من",
+        answers: ["شروط الصلاة", "أركان الصلاة", "سنن الصلاة"],
+        correct: 0
+    },
+    {
+        question: "من أركان الصلاة",
+        answers: ["استقبال القبلة", "النية", "ستر العورة"],
+        correct: 1
+    },
+    {
+        question: "تنقسم سنن الصلاة إلى",
+        answers: ["أبعاض", "هيئات", "كلاهما (أبعاض وهيئات)"],
+        correct: 2
+    },
+    {
+        question: "الاعتدال من الركوع يعتبر من",
+        answers: ["الأبعاض", "السنن", "الأركان"],
+        correct: 2
+    },
+    {
+        question: "عورة المرأة في الصلاة (ما عدا)",
+        answers: ["الوجه", "الكفين", "الوجه والكفين"],
+        correct: 2
+    },
+    {
+        question: "من أنكر الصلاة جحوداً فهو",
+        answers: ["كافر", "فاسق", "مرتد"],
+        correct: 0
+    },
+    {
+        question: "النية في الوضوء والغسل تعتبر من",
+        answers: ["السنن", "الأركان (الفرائض)", "الشروط"],
+        correct: 1
     }
 ];
 
@@ -201,6 +286,9 @@ nextBtn.addEventListener("click", () => {
         quizContent.style.display = "none"; 
         resultContainer.style.display = "block";
         scoreText.textContent = `${score} / ${quizData.length}`; 
+        
+        // استدعاء دالة التقييم الذكي ليظهر مع النتيجة النهائية
+        showSmartFeedback();
     }
 });
 
@@ -214,4 +302,35 @@ if (restartBtn) {
         shuffleQuestions();
         loadQuestion();
     });
+}
+
+// دالة التقييم الذكي والعبارات التشجيعية المخصصة لطالبات "على بصيرة"
+function showSmartFeedback() {
+    let percent = (score / quizData.length) * 100;
+    let message = "";
+    
+    if (percent === 100) {
+        message = "ما شاء الله! بصيرتكِ كاملة وإجاباتكِ سديدة 👑✨";
+    } else if (percent >= 80) {
+        message = "ممتازة جداً! أنار الله دربكِ وزادكِ علماً وفهماً 🌸";
+    } else if (percent >= 50) {
+        message = "نتيجة طيبة وجيدة، استمري في طلب العلم والتفقه ✨";
+    } else {
+        message = "محاولة جميلة أعد الاختبار لتثبيت معلوماتكِ الفقهية 📖";
+    }
+    
+    let msgElement = document.getElementById("customFeedback");
+    if (!msgElement) {
+        msgElement = document.createElement("div");
+        msgElement.id = "customFeedback";
+        msgElement.style.marginTop = "15px";
+        msgElement.style.fontSize = "1.2rem";
+        msgElement.style.fontWeight = "bold";
+        msgElement.style.color = "#8b5cf6";
+        msgElement.style.lineHeight = "1.6";
+        
+        resultContainer.insertBefore(msgElement, restartBtn);
+    }
+    
+    msgElement.textContent = message;
 }

@@ -401,3 +401,18 @@ h2{
     line-height: 1.6;
 }
 
+.answer:hover {
+    transform: translateY(-2px); /* ترتفع للأعلى قليلاً */
+    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.15); /* توهج بنفسجي ناعم */
+    border-color: #8b5cf6;
+}
+
+#startBtn, #nextBtn {
+    transition: all 0.3s ease;
+}
+
+#startBtn:hover, #nextBtn:hover {
+    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+    transform: scale(1.02); /* يتسع الزر بشكل طفيف ومريح للعين */
+}
+
