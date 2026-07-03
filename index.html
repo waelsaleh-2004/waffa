@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App</title>
+    <title>على بصيرة</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,14 +13,18 @@
         <img src="./img/IMG-20260628-WA0005.jpg" alt="logo">
     </div>
 
-    <!-- 🌟 شاشة البدء الجديدة لفك قفل الصوت 🌟 -->
-    <div id="startContainer" class="start-box">
-        <h2>فكرة  أ. وفاء عدوان </h2>
-        <h2>إشراف أ . مريم زقوت </h2>
-
-        <h2>مرحباً بك في موقع على بصيرة 📝</h2> 
-        <button id="startBtn" class="category-btn" style="margin-top: 20px; width: 100%;"> 🚀 إختبر معلوماتك </button>
-    </div>
+        <!-- 🌟 شاشة البدء الجديدة لفك قفل الصوت 🌟 -->
+        <div id="startContainer" class="start-box">
+            <!-- التعديل هنا: دمج الأسماء في سطر واحد متجاوب -->
+            <div class="credits-container" style="display: flex; justify-content: space-around; gap: 5px; flex-wrap: wrap; margin-bottom: 20px;">
+                <h2 style="font-size: 1.1rem; margin: 0;">إشراف أ / مريم زقوت</h2>
+                <h2 style="font-size: 1.1rem; margin: 0;">فكرة الطالبة/ وفاء عدوان</h2>
+            </div>
+    
+            <h2>مرحباً بك في موقع على بصيرة 📝</h2> 
+            <button id="startBtn" class="category-btn" style="margin-top: 20px; width: 100%;"> 🚀 إختبر معلوماتك </button>
+        </div>
+    
 
     <!-- محتوى الاختبار (مخفي في البداية ويظهر بعد الضغط على ابدأ) -->
     <div id="quizContent" style="display: none;">
