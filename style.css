@@ -417,3 +417,50 @@ h2{
     transform: scale(1.02); /* يتسع الزر بشكل طفيف ومريح للعين */
 }
 
+/* --- تنسيق زر الوضع الليلي --- */
+.dark-mode-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.dark-mode-btn:hover {
+    transform: scale(1.1);
+}
+
+/* --- الألوان الخاصة بالوضع الليلي --- */
+/* عندما تنشط فئة الـ dark-mode على جسم الصفحة body */
+body.dark-mode {
+    background-color: #121212; /* خلفية الشاشة الخارجية داكنة */
+}
+
+body.dark-mode .quiz-container {
+    background-color: #1e1e1e; /* خلفية صندوق الاختبار داكنة */
+    color: #ffffff; /* لون النصوص الافتراضية أبيض */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .start-box h2, 
+body.dark-mode #question, 
+body.dark-mode .progress {
+    color: #e0e0e0; /* تفتيح العناوين والأسئلة لسهولة القراءة */
+}
+
+body.dark-mode .dark-mode-btn {
+    background: #333333; /* تغيير لون خلفية الزر نفسه */
+}
+
+

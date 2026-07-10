@@ -334,3 +334,30 @@ function showSmartFeedback() {
     
     msgElement.textContent = message;
 }
+
+// --- كود تفعيل ومراقبة الوضع الليلي ---
+
+// 1. تعريف عناصر الزر وجسم الصفحة
+const darkModeToggle = document.getElementById('darkModeToggle');
+const bodyElement = document.body;
+
+// 2. التحقق مما إذا كان المستخدم قد فعل الوضع الليلي سابقاً (حفظ الخيار)
+if (localStorage.getItem('theme') === 'dark') {
+    bodyElement.classList.add('dark-mode');
+    darkModeToggle.innerText = '☀️'; // تغيير الأيقونة إلى شمس
+}
+
+// 3. إضافة حدث الضغط على الزر لتغيير المظهر
+darkModeToggle.addEventListener('click', () => {
+    // تبديل الفئة داخل الـ body
+    bodyElement.classList.toggle('dark-mode');
+    
+    // التحقق من الوضع الحالي وحفظه وتغيير شكل الأيقونة
+    if (bodyElement.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        darkModeToggle.innerText = '☀️'; // شمس للعودة للوضع النهاري
+    } else {
+        localStorage.setItem('theme', 'light');
+        darkModeToggle.innerText = '🌙'; // هلال للعودة للوضع الليلي
+    }
+});
